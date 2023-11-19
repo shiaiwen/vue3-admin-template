@@ -9,6 +9,7 @@
     "format": "prettier --write \"./**/*.{html,vue,ts,js,json,md}\"",
     "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
     "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix",
+    "commitlint": "commitlint --config commitlint.config.cjs -e -V",
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "preview": "vite preview",
@@ -19,6 +20,8 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.3",
+    "@commitlint/cli": "^18.4.2",
+    "@commitlint/config-conventional": "^18.4.2",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "@vitejs/plugin-vue": "^4.5.0",
