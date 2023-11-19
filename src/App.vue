@@ -4,4 +4,13 @@
 
 <script setup lang="ts">
   const str = '我爱你中国'
+
+  for (var i=0; i<1000; i++) {
+    
+
+
+    console.log(
+      '格式化测试'
+    )
+  }
 </script>
