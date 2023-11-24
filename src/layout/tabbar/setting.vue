@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Setting"></script>
 
 <style scoped lang="scss">
 .tabbar-right {

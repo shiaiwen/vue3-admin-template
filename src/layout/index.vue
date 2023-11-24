@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Layout">
 // vue3 组件无需注册
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'

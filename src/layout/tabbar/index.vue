@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Tabbar">
 import breadcrumb from './breadcrumb.vue'
 import setting from './setting.vue'
 </script>

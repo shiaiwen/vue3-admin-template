@@ -1,7 +1,7 @@
 <template>
   <div class="tabbar-left">
-    <el-icon>
-      <Fold />
+    <el-icon @click="changeIcon">
+      <component :is="fold ? 'Fold' : 'Expand'"></component>
     </el-icon>
     <!-- 左侧面包 -->
     <el-breadcrumb separator-icon="ArrowRight">
@@ -11,7 +11,13 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Breadcrumb">
+import { ref } from 'vue'
+let fold = ref(false)
+const changeIcon = () => {
+  fold.value = !fold.value
+}
+</script>
 
 <style scoped lang="scss">
 .tabbar-left {

@@ -9,7 +9,9 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts" setup name="Main">
+console.log()
+</script>
 
 <style scoped lang="scss">
 .fade-enter-from {

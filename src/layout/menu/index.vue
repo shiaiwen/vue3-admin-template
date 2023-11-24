@@ -54,7 +54,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="Menu">
 import { useRouter } from 'vue-router'
 // 过去父组件传递过来的全部路由数据
 defineProps(['menuList'])
@@ -65,13 +65,6 @@ const goRoute = (vc: any) => {
   $router.push(vc.index)
 }
 </script>
-<script lang="ts">
-export default {
-  // eslint-disable-next-line vue/no-reserved-component-names
-  name: 'Menu'
-}
-</script>
-
 <style scoped lang="scss">
 .el-menu {
   border-right: 0;
