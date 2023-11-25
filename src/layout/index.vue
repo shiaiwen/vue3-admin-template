@@ -1,6 +1,6 @@
 <template>
   <div class="layout_wrapper">
-    <div class="layout_slider">
+    <div class="layout_slider" :class="{ fold: layoutSettingStore.fold }">
       <Logo />
       <!-- 展示菜单 -->
       <el-scrollbar class="scrollbar">
@@ -9,15 +9,16 @@
           router
           text-color="#fff"
           :default-active="$route.path"
+          :collapse="layoutSettingStore.fold"
         >
           <Menu :menuList="userStore.menuRoutes" />
         </el-menu>
       </el-scrollbar>
     </div>
-    <div class="layout_tabbar">
+    <div class="layout_tabbar" :class="{ fold: layoutSettingStore.fold }">
       <tabbar />
     </div>
-    <div class="layout_main">
+    <div class="layout_main" :class="{ fold: layoutSettingStore.fold }">
       <Main />
     </div>
   </div>
@@ -32,9 +33,10 @@ import tabbar from './tabbar/index.vue'
 // 获取用户相关的小仓库
 import useUserStore from '@/store/modules/user'
 import { useRoute } from 'vue-router'
+import useLayoutSettingStore from '@/store/modules/setting'
+let layoutSettingStore = useLayoutSettingStore()
 let userStore = useUserStore()
 let $route = useRoute()
-console.log($route.path)
 </script>
 
 <style scoped lang="scss">
@@ -46,8 +48,12 @@ console.log($route.path)
   width: $base-menu-width;
   height: 100vh;
   background-color: $base-menu-background;
+  transition: all 0.3s;
   .scrollbar {
     height: calc(100vh - $base-logo-height);
+  }
+  &.fold {
+    width: $base-menu-min-width;
   }
 }
 .layout_tabbar {
@@ -56,6 +62,11 @@ console.log($route.path)
   height: $base-tabbar-height;
   top: 0;
   left: $base-menu-width;
+  transition: all 0.3s;
+  &.fold {
+    width: calc(100% - $base-menu-min-width);
+    left: $base-menu-min-width;
+  }
 }
 .layout_main {
   position: absolute;
@@ -66,5 +77,11 @@ console.log($route.path)
   top: $base-tabbar-height;
   padding: 20px;
   overflow: auto;
+  transition: all 0.3s;
+
+  &.fold {
+    width: calc(100% - $base-menu-min-width);
+    left: $base-menu-min-width;
+  }
 }
 </style>

@@ -45,10 +45,11 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import useUserStore from '@/store/modules/user'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getTime } from '@/utils/time'
 const $router = useRouter()
+const $route = useRoute()
 let useStore = useUserStore()
 // 获取表单对象
 let ruleFormRef = ref()
@@ -69,7 +70,12 @@ const login = async () => {
   try {
     loading.value = false
     await useStore.userLogin(loginForm)
-    $router.push('/')
+    let path: string = '/'
+    if ($route.query.redirect) {
+      path = $route.query.redirect as string
+    }
+
+    $router.push(path)
     ElNotification({
       message: '登录成功',
       title: `hello,${getTime()}好`,

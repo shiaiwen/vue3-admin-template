@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import useUserStore from '@/store/modules/user'
 //创建axios实例
 const request = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API, //基础路径上会携带api
@@ -10,6 +11,11 @@ request.interceptors.request.use((config) => {
   // 返回配置对象
   // 添加请求头, 添加公共参数
   //   必须 return config
+  const userStore = useUserStore()
+  console.log(userStore.token, '获取用户的信息')
+  if (userStore.token) {
+    config.headers.token = userStore.token
+  }
   return config
 })
 //响应拦截器

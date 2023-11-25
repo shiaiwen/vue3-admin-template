@@ -15,10 +15,10 @@ import setting from '@/setting'
   height: $base-logo-height;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  padding-left: 10px;
   img {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
   p {
     font-size: $base-logo-fontsize;
