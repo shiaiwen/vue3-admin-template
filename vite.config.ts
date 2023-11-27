@@ -2,12 +2,14 @@ import path from 'path'
 import vue from '@vitejs/plugin-vue'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import { viteMockServe } from 'vite-plugin-mock'
-import { UserConfigExport, ConfigEnv } from 'vite'
+import { UserConfigExport, ConfigEnv, loadEnv } from 'vite'
 import vueSetupExtend from 'vite-plugin-vue-setup-extend'
 // 配置代理跨域
 // https://vitejs.dev/config/
 
-export default ({ command }: ConfigEnv): UserConfigExport => {
+export default ({ command, mode }: ConfigEnv): UserConfigExport => {
+  // 获取各种环境下的文件
+  const env = loadEnv(mode, process.cwd())
   return {
     plugins: [
       vue(),
@@ -34,6 +36,17 @@ export default ({ command }: ConfigEnv): UserConfigExport => {
         scss: {
           javascriptEnabled: true,
           additionalData: '@import "./src/styles/variable.scss";'
+        }
+      }
+    },
+    // 代理跨域
+    server: {
+      proxy: {
+        [env.VITE_APP_BASE_API]: {
+          // 服务器地址
+          target: env.VITE_SERVE,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
     }

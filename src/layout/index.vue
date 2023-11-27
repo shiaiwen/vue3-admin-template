@@ -52,9 +52,6 @@ let $route = useRoute()
   .scrollbar {
     height: calc(100vh - $base-logo-height);
   }
-  &.fold {
-    width: $base-menu-min-width;
-  }
 }
 .layout_tabbar {
   position: fixed;
@@ -70,7 +67,7 @@ let $route = useRoute()
 }
 .layout_main {
   position: absolute;
-  background-color: #0f0;
+  background-color: #fff;
   width: calc(100% - $base-menu-width);
   height: calc(100vh - $base-tabbar-height);
   left: $base-menu-width;

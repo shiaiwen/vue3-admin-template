@@ -17,5 +17,6 @@ import setting from './setting.vue'
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #fff;
 }
 </style>

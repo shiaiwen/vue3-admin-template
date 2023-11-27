@@ -13,7 +13,7 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="a">退出登录</el-dropdown-item>
+          <el-dropdown-item command="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -40,10 +40,9 @@ const fullScreen = () => {
     document.exitFullscreen()
   }
 }
-const handleCommand = (command: string | number | object) => {
-  //   ElMessage(`click on item ${command}`)
-  if (command === 'a') {
-    userStore.userLogout()
+const handleCommand = async (command: string | number | object) => {
+  if (command === 'logout') {
+    await userStore.userLogout()
     $router.push({
       path: '/login',
       query: {

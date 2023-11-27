@@ -55,7 +55,7 @@ let useStore = useUserStore()
 let ruleFormRef = ref()
 const loginForm = reactive({
   username: 'admin',
-  password: '111111'
+  password: 'atguigu123'
 })
 let loading = ref(false)
 // 点击登录按钮
@@ -64,7 +64,6 @@ const login = async () => {
   // 1. 通知仓库去发请求
   // 请求成功跳转到首页
   // 请求失败 弹出登陆失败的消息
-  // console.log(ruleFormRef.value, '获取表单对象的值')
   await ruleFormRef.value.validate()
   loading.value = true
   try {
@@ -91,7 +90,6 @@ const login = async () => {
   }
 }
 const validatorUsername = (rule: any, value: any, callback: any) => {
-  console.log(value)
   if (value.length >= 5) {
     callback()
   } else {

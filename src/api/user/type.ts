@@ -5,35 +5,24 @@ export interface loginForm {
   password: string
 }
 
-interface dataType {
-  token?: string
-  message?: string
-}
-
-export interface loginResData {
+// 定义全部接口数据返回拥有的 ts 类型
+export interface ResponseData {
   code: number
-  data: dataType
+  message: string
+  ok: boolean
 }
 
-// 定义服务器返回用户信息的类型
-
-interface userInfo {
-  userId: number
-  avatar: string
-  username: string
-  password: string
-  desc: string
-  roles: strng[]
-  buttons: string[]
-  routes: string[]
-  token: string
+// 定义登录接口返回的数据额类型
+export interface loginResData extends ResponseData {
+  data: string
 }
-
-interface user {
-  checkUser: userInfo
-}
-
-export interface userResData {
-  code: number
-  data: user
+// 获取用户信息返回数据类型
+export interface userinfoResData extends ResponseData {
+  data: {
+    routes: string[]
+    buttons: string[]
+    roles: string[]
+    name: string
+    avatar: string
+  }
 }

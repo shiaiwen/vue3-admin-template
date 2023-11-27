@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1>sku管理</h1>
+    <el-card class="box-card">
+      <div v-for="o in 4" :key="o" class="text item">
+        {{ 'List item ' + o }}
+      </div>
+    </el-card>
   </div>
 </template>
 

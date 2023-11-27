@@ -12,7 +12,6 @@ request.interceptors.request.use((config) => {
   // 添加请求头, 添加公共参数
   //   必须 return config
   const userStore = useUserStore()
-  console.log(userStore.token, '获取用户的信息')
   if (userStore.token) {
     config.headers.token = userStore.token
   }
