@@ -6,7 +6,7 @@ export interface ResponseData {
 }
 // 已有 品牌的数据类型
 export interface TradeMark {
-  id?: number // 新增没有id
+  id?: number | null // 新增没有id
   tmName: string
   logoUrl: string
 }
