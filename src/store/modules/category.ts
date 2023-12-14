@@ -30,7 +30,7 @@ const useCategoryStore = defineStore('Category', {
       }
     },
     async getC3() {
-      const res: categoryResData = await reqC3(this.c1Id, this.c2Id)
+      const res: categoryResData = await reqC3(this.c2Id)
       if (res.code === 200) {
         this.c3Arr = res.data
       }
