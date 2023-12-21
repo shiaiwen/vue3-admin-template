@@ -33,6 +33,7 @@
                 size="small"
                 icon="Plus"
                 title="添加SKU"
+                @click="addSku(scope.row)"
               ></el-button>
               <el-button
                 type="primary"
@@ -46,13 +47,22 @@
                 size="small"
                 icon="View"
                 title="查看SKU列表"
+                @click="getSkuList(scope.row)"
               ></el-button>
-              <el-button
-                type="danger"
-                size="small"
-                icon="Delete"
-                title="删除SPU"
-              ></el-button>
+              <el-popconfirm
+                title="确定删除吗?"
+                width="300px"
+                @confirm="handleDelete(scope.row)"
+              >
+                <template #reference>
+                  <el-button
+                    type="danger"
+                    size="small"
+                    icon="Delete"
+                    title="删除SPU"
+                  ></el-button>
+                </template>
+              </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
@@ -72,36 +82,63 @@
         v-show="sence === 1"
         @changeSence="changeSence"
       ></spuForm>
-      <skuForm v-show="sence === 2"></skuForm>
+      <skuForm
+        v-show="sence === 2"
+        @changeSence="changeSence"
+        ref="skuFormRef"
+      ></skuForm>
+      <el-dialog title="SKU列表" v-model="show">
+        <el-table border :data="skuList">
+          <el-table-column
+            label="SKU名字"
+            prop="skuName"
+            width="500px"
+          ></el-table-column>
+          <el-table-column label="SKU价格" prop="price"></el-table-column>
+          <el-table-column label="SKU重量" prop="weight"></el-table-column>
+          <el-table-column label="SKU图片">
+            <template v-slot="slot">
+              <img
+                :src="slot.row.skuDefaultImg"
+                alt=""
+                style="width: 100px; height: 100px"
+              />
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-dialog>
     </el-card>
   </div>
 </template>
 
 <script setup lang="ts" name="Spu">
-import { ref, watch } from 'vue'
+import { ref, watch, onBeforeMount } from 'vue'
 import useCategoryStore from '@/store/modules/category'
-import { reqGetList } from '@/api/product/spu'
-import type { HasSpuResData, Records, SpuData } from '@/api/product/spu/type'
+import { reqGetList, reqGetSkuListById, reqRemoveSku } from '@/api/product/spu'
+import type {
+  HasSpuResData,
+  Records,
+  SpuData,
+  SkuData
+} from '@/api/product/spu/type'
 import skuForm from './skuForm.vue'
 import spuForm from './spuForm.vue'
+import { ElMessage } from 'element-plus'
 const categoryStore = useCategoryStore()
 const sence = ref<number>(0) // 0 显示已有 1 显示 spu 2显示sku
 const pageNo = ref<number>(1)
 const pageSize = ref<number>(3)
 let records = ref<Records>([])
 let total = ref<number>(0)
-// 获取子组件实例
+// 获取子组件实例spu
 let spuFormRef = ref<any>()
-// 提交表单收集信息
-let spuParams = ref<SpuData>({
-  category3Id: '', // 三级分类的id
-  spuName: '', // spu 的名字
-  description: '', // 描述
-  tmId: '', // 品牌的id
-  spuImageList: [], // 图片
-  spuSaleAttrValueList: []
-})
-console.log(spuParams)
+// 获取子组件实例sku
+let skuFormRef = ref<any>()
+// 展示的 sku列表
+let skuList = ref<SkuData[]>([])
+// 对话框的显示和隐藏
+let show = ref<boolean>(false)
+
 const getList = async (pager = 1) => {
   pageNo.value = pager
   // 获取列表数据
@@ -138,6 +175,34 @@ const changeSence = (obj: any) => {
     getList()
   }
 }
+const addSku = (row: SpuData) => {
+  sence.value = 2
+  //  调用子组件的方法
+  skuFormRef.value.init(categoryStore.c1Id, categoryStore.c2Id, row)
+}
+const getSkuList = async ({ id }: any) => {
+  const res = await reqGetSkuListById(id)
+  console.log(res, '获取skuList的结果')
+  if (res.code === 200) {
+    skuList.value = res.data
+    show.value = true
+  }
+}
+const handleDelete = async ({ id }: any) => {
+  const res = await reqRemoveSku(id)
+  if (res.code === 200) {
+    ElMessage({
+      type: 'success',
+      message: '删除成功'
+    })
+    getList()
+  } else {
+    ElMessage({
+      type: 'error',
+      message: '删除失败'
+    })
+  }
+}
 watch(
   () => categoryStore.c3Id,
   () => {
@@ -147,6 +212,10 @@ watch(
     getList()
   }
 )
+// 路由切换,清空仓库数据
+onBeforeMount(() => {
+  categoryStore.$reset()
+})
 </script>
 
 <style scoped lang="scss"></style>

@@ -5,7 +5,8 @@ import type {
   AllTradeMarkList,
   AllImageList,
   SaleAttrResData,
-  AllSaleAttr
+  AllSaleAttr,
+  skuList
 } from './type'
 
 enum API {
@@ -15,7 +16,10 @@ enum API {
   SPUSALEATTRLIST = '/admin/product/spuSaleAttrList',
   BASESALEATTRLIST = '/admin/product/baseSaleAttrList',
   ADD_SPU = '/admin/product/saveSpuInfo',
-  UPDATE_SPU = '/admin/product/updateSpuInfo'
+  UPDATE_SPU = '/admin/product/updateSpuInfo',
+  SAVESKUINFO = '/admin/product/saveSkuInfo', // 新增 sku
+  SKU_LIST = '/admin/product/findBySpuId',
+  SKU_REMOVE = '/admin/product/deleteSpu'
 }
 export const reqGetList = (
   page: number,
@@ -30,6 +34,7 @@ export const reqGetAllTrademarkList = () =>
   request.get<any, AllTradeMarkList>(API.GETTRADEMARKLIST)
 export const reqGetImageList = (spuId: number) =>
   request.get<any, AllImageList>(API.IMAGE_URL + '/' + spuId)
+// 获取已有销售属性
 export const reqGetAttrList = (spuId: number) =>
   request.get<any, SaleAttrResData>(API.SPUSALEATTRLIST + '/' + spuId)
 //   获取全部销售属性
@@ -43,3 +48,12 @@ export const reqSaveSpu = (data: any) => {
     return request.post<any, any>(API.ADD_SPU, data)
   }
 }
+// 保存sku
+export const reqSaveSku = (data: any) =>
+  request.post<any, any>(API.SAVESKUINFO, data)
+// 根据 spuid 查询 sku 列表
+export const reqGetSkuListById = (spuid: string | number) =>
+  request.get<any, skuList>(API.SKU_LIST + '/' + spuid)
+// 根据 spuid 查询 sku 列表
+export const reqRemoveSku = (spuid: string | number) =>
+  request.delete<any, any>(API.SKU_REMOVE + '/' + spuid)

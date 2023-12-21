@@ -124,7 +124,7 @@
 </template>
 
 <script setup lang="ts" name="spuForm">
-import { ref, computed } from 'vue'
+import { ref, computed, reactive } from 'vue'
 import { Plus } from '@element-plus/icons-vue'
 import { ElMessage, type UploadProps } from 'element-plus'
 import type { SpuData } from '@/api/product/spu/type'
@@ -150,7 +150,7 @@ let tradeMarkList = ref<TradeMark[]>([])
 let imageList = ref<SpuImage[]>([])
 let saleAttrList = ref<SaleAttr[]>([])
 let allSaleAttrList = ref<SaleAttrDict[]>([])
-let spuParams = ref<any>({
+let spuParams = reactive<any>({
   category3Id: '', // 三级分类的id
   spuName: '', // spu 的名字
   description: '', // 描述

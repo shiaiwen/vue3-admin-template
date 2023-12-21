@@ -13,7 +13,7 @@ export interface SpuData {
   category3Id: string | number
   tmId: number | string // 品牌id
   spuSaleAttrValueList: null | SaleAttr[] // 销售属性
-  spuImageList: null | AllImageList // 照片墙的属性
+  spuImageList: null | SpuImage[] // 照片墙的属性
 }
 export type Records = SpuData[]
 // 定义获取已有的SPU接口返回的数据类型
@@ -89,4 +89,31 @@ export interface SaleAttrDict {
 // reqGetAllSaleAttr 请求得的数据的 ts 类型
 export interface AllSaleAttr extends comResData {
   data: SaleAttrDict[]
+}
+export interface Attr {
+  attrId: number | string //平台属性的ID
+  valueId: number | string //属性值的ID
+}
+
+export interface saleArr {
+  saleAttrId: number | string //属性ID
+  saleAttrValueId: number | string //属性值的ID
+}
+
+export interface SkuData {
+  category3Id: string | number //三级分类的ID
+  spuId: string | number //已有的SPU的ID
+  tmId: string | number //SPU品牌的ID
+  skuName: string //sku名字
+  price: string | number //sku价格
+  weight: string | number //sku重量
+  skuDesc: string //sku的描述
+  skuAttrValueList?: Attr[]
+  skuSaleAttrValueList?: saleArr[]
+  skuDefaultImg: string //sku图片地址
+  isSale: string | number
+}
+
+export interface skuList extends comResData {
+  data: SkuData[]
 }
