@@ -87,10 +87,10 @@ export const constRoutes = [
       },
       {
         path: '/acl/permission',
-        component: () => import('@/views/acl/permission/index.vue'),
+        component: () => import('@/views/acl/menu/index.vue'),
         name: 'Permission',
         meta: {
-          title: '权限管理',
+          title: '菜单管理',
           hidden: false,
           icon: 'Notebook'
         }

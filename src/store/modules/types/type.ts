@@ -4,7 +4,7 @@ import type { categoryObj } from '@/api/product/attr/type'
 export interface UserState {
   token: string | null
   menuRoutes: RouteRecordRaw[]
-  name: string
+  username: string
   avatar: string
 }
 // 定义分类的 state 的类型

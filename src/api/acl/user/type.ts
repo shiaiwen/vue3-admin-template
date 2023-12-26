@@ -17,7 +17,7 @@ export interface UserListData {
   total: number
   size: number
   current: number
-  pages: 5
+  pages: number
 }
 export interface RolesResData extends comResData {
   data: RoleRes

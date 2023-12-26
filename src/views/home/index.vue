@@ -1,9 +1,18 @@
 <template>
   <div>
-    <h1>一级路由home</h1>
+    <el-card class="box">
+      <img :src="userStore.avatar" alt="" class="avatar" />
+    </el-card>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="Home">
+import useUserStore from '@/store/modules/user'
+let userStore = useUserStore()
+</script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.box {
+  display: flex;
+}
+</style>

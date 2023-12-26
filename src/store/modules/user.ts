@@ -46,7 +46,7 @@ const useUserStore = defineStore('User', {
         this.avatar = res.data.avatar
         return 'ok'
       } else {
-        return new Promise.reject(res.message)
+        return Promise.reject(new Error(res.message))
       }
     },
     // 退出
