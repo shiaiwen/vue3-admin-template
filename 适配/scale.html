@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* scale */
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .box {
+      width: 100vw;
+      height: 100vh;
+      background: url('../src/assets/images/background.jpg') no-repeat;
+      background-size: cover;
+    }
+  </style>
+
+  <body>
+    <div class="box">
+      <div class="top">我撒就是</div>
+      <div class="bottom">我撒就是</div>
+    </div>
+  </body>
+  <script>
+    // 控制大屏的放大和缩小
+    let box = document.querySelector('.box')
+    function getScale(w = 1920, h = 1080) {
+      const ww = window.innerWidth / w
+      const wh = window.innerHeight / h
+      return
+    }
+  </script>
+</html>
