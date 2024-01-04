@@ -12,6 +12,7 @@ import './styles/index.scss'
 import 'nprogress/nprogress.css'
 import App from './App.vue'
 import pinia from './store'
+import { isHasBtn } from '@/directive/has'
 const app = createApp(App)
 app.use(ElementPlus, {
   locale: zhCn
@@ -24,4 +25,5 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 }
 app.use(gloablComponent)
 app.use(router)
+isHasBtn(app)
 app.mount('#app')

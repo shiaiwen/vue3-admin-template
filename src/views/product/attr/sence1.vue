@@ -72,7 +72,7 @@ import type { attr, attrValueObj } from '@/api/product/attr/type'
 import { ElMessage } from 'element-plus'
 import { reactive, ref, nextTick } from 'vue'
 import eventBus from '@/libs/eventBus'
-const emit = defineEmits(['changeSence'])
+const emit = defineEmits(['changeSence', 'cancel'])
 //准备一个数组:将来存储对应的组件实例el-input
 let inputArr = ref<any>([])
 

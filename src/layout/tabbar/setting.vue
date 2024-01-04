@@ -89,10 +89,7 @@ const handleCommand = async (command: string | number | object) => {
   if (command === 'logout') {
     await userStore.userLogout()
     $router.push({
-      path: '/login',
-      query: {
-        redirect: $route.path
-      }
+      path: '/login'
     })
   }
   // 向服务端发请求

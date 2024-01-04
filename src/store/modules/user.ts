@@ -4,9 +4,21 @@ import { setToken, getToken, removeToken } from '@/utils/token'
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 import type { loginForm, loginResData, userinfoResData } from '@/api/user/type'
 import type { UserState } from './types/type'
-// 引入路由
-import { constRoutes } from '@/router/routes'
+import _ from 'lodash'
 
+// 引入路由
+import { constRoutes, asyncRoute, anyRoute } from '@/router/routes'
+
+export const filterAsyncRoute = (asyncRoute: any, routes: any) => {
+  return asyncRoute.filter((item: any) => {
+    if (routes.includes(item.name)) {
+      if (item.children && item.children.length > 0) {
+        item.children = filterAsyncRoute(item.children, routes)
+      }
+      return true
+    }
+  })
+}
 const useUserStore = defineStore('User', {
   // 存储状态
   state: (): UserState => {
@@ -14,7 +26,9 @@ const useUserStore = defineStore('User', {
       token: getToken(), // 用户的唯一标识
       menuRoutes: constRoutes, // 生成菜单需要的路由数据
       username: '',
-      avatar: ''
+      avatar: '',
+      routes: [],
+      buttons: []
     }
   },
   //   异步 | 逻辑
@@ -44,6 +58,15 @@ const useUserStore = defineStore('User', {
         // 获取用户信息成功
         this.username = res.data.name
         this.avatar = res.data.avatar
+        this.routes = res.data.routes
+        this.buttons = res.data.buttons
+
+        const userAsyncRoute: any = filterAsyncRoute(
+          _.cloneDeep(asyncRoute),
+          res.data.routes
+        )
+        // 这仅仅是注册了菜单，而没有加载路由进去
+        this.menuRoutes = [...constRoutes, ...userAsyncRoute, ...anyRoute]
         return 'ok'
       } else {
         return Promise.reject(new Error(res.message))

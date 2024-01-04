@@ -1,32 +1,38 @@
 <template>
-  <svg aria-hidden="true">
-    <use :xlink:href="symbolId" :fill="color" />
+  <!-- svg:图标外层容器节点,内部需要与use标签结合使用 -->
+  <svg :style="{ width, height }">
+    <!-- xlink:href执行用哪一个图标,属性值务必#icon-图标名字 -->
+    <!-- use标签fill属性可以设置图标的颜色 -->
+    <use :xlink:href="prefix + name" :fill="color"></use>
   </svg>
 </template>
 
-<script>
-import { defineComponent, computed } from 'vue'
-
-export default defineComponent({
-  name: 'SvgIcon',
-  // 父组件传递过来的参数
-  props: {
-    prefix: {
-      type: String,
-      default: 'icon'
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    color: {
-      type: String,
-      default: '#333'
-    }
+<script setup lang="ts">
+//接受父组件传递过来的参数
+defineProps({
+  //xlink:href属性值前缀
+  prefix: {
+    type: String,
+    default: '#icon-'
   },
-  setup(props) {
-    const symbolId = computed(() => `#${props.prefix}-${props.name}`)
-    return { symbolId }
+  //提供使用的图标名字
+  name: String,
+  //接受父组件传递颜色
+  color: {
+    type: String,
+    default: ''
+  },
+  //接受父组件传递过来的图标的宽度
+  width: {
+    type: String,
+    default: '16px'
+  },
+  //接受父组件传递过来的图标的高度
+  height: {
+    type: String,
+    default: '16px'
   }
 })
 </script>
+
+<style scoped></style>

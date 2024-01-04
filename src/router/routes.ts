@@ -34,17 +34,6 @@ export const constRoutes = [
     ]
   },
   {
-    path: '/404',
-    name: '404',
-    component: () => import('../views/404/index.vue'),
-    meta: {
-      title: '404',
-      hidden: true
-    }
-  },
-  // 没有匹配上,就重定向到404
-  //  { path: '/:pathMatch(.*)*', name: 'NotFound', component: NotFound },
-  {
     path: '/screen',
     name: 'Screen',
     component: () => import('@/views/screen/index.vue'),
@@ -54,6 +43,18 @@ export const constRoutes = [
       icon: 'SetUp'
     }
   },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('../views/404/index.vue'),
+    meta: {
+      title: '404',
+      hidden: true
+    }
+  }
+]
+
+export const asyncRoute = [
   {
     path: '/acl',
     component: () => import('@/layout/index.vue'),
@@ -68,7 +69,7 @@ export const constRoutes = [
       {
         path: '/acl/user',
         component: () => import('@/views/acl/user/index.vue'),
-        name: 'Acl',
+        name: 'User',
         meta: {
           title: '用户管理',
           hidden: false,
@@ -149,7 +150,9 @@ export const constRoutes = [
         }
       }
     ]
-  },
+  }
+]
+export const anyRoute = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

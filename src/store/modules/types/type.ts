@@ -1,11 +1,13 @@
 // 定义小仓库数据的 state 类型
-import type { RouteRecordRaw } from 'vue-router'
+// import type { RouteRecordRaw } from 'vue-router'
 import type { categoryObj } from '@/api/product/attr/type'
 export interface UserState {
   token: string | null
-  menuRoutes: RouteRecordRaw[]
+  menuRoutes: any
   username: string
   avatar: string
+  routes: string[]
+  buttons: string[]
 }
 // 定义分类的 state 的类型
 export interface categoryState {
