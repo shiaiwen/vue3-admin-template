@@ -12,7 +12,7 @@
     "lint:eslint": "eslint src/**/*.{ts,vue} --cache --fix",
     "lint:style": "stylelint src/**/*.{css,scss,vue} --cache --fix",
     "commitlint": "commitlint --config commitlint.config.cjs -e -V",
-    "preinstall": "node ./scripts/preinstall.js",
+
     "lint": "eslint src",
     "fix": "eslint src --fix",
     "preview": "vite preview",
