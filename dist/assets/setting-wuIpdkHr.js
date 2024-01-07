@@ -1,0 +1,1 @@
+import{I as e}from"./index-iq3_YIvd.js";const t=e("SettingStore",{state:()=>({fold:!1,refresh:!1}),actions:{changeFold(){this.fold=!this.fold},changeRefresh(){this.refresh=!this.refresh}}}),o=t;export{o as u};

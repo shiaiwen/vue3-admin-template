@@ -49,8 +49,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
           rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
-    },
+    }
     // 用于 GitHub Pages 部署
-    base: '/vue3-admin-template/'
+    // base: '/vue3-admin-template/'
   }
 }
